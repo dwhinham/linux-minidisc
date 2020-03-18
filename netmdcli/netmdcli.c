@@ -20,10 +20,15 @@
  */
 
 #include <gcrypt.h>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 
 #include "libnetmd.h"
 #include "utils.h"
+#ifdef WIN32
+#include "getopt.h"
+#endif
 
 void print_disc_info(netmd_dev_handle* devh, minidisc *md);
 void print_current_track_info(netmd_dev_handle* devh);

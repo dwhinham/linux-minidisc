@@ -22,7 +22,14 @@
  *
  */
 
+#ifdef WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#define msleep(x) Sleep(x)
+#else
 #include <unistd.h>
+#define msleep(x) usleep(x * 1000)
+#endif
 
 #include "libnetmd.h"
 #include "utils.h"
@@ -72,7 +79,7 @@ int netmd_wait_for_sync(netmd_dev_handle* devh)
 
     do {
         if (tries != MAX_SYNC_WAITS)
-            usleep(100 * 1000); // 100ms
+            msleep(100); // 100ms
 
         libusb_control_transfer(dev, 0xc1, 0x01, 0, 0, syncmsg, 0x04, 5000);
         tries -= 1;

@@ -23,7 +23,6 @@
  */
 
 #include <string.h>
-#include <unistd.h>
 
 #include "common.h"
 #include "const.h"
@@ -35,9 +34,11 @@
 #define NETMD_RECV_TRIES 30
 
 #ifdef WIN32
+    #define WIN32_LEAN_AND_MEAN
     #include <windows.h>
     #define msleep(x) Sleep(x)
 #else
+    #include <unistd.h>
     #define msleep(x) usleep(1000*x)
 #endif
 

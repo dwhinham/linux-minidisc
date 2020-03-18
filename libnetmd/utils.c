@@ -26,7 +26,7 @@
 #include "utils.h"
 #include "log.h"
 
-inline unsigned char proper_to_bcd_single(unsigned char value)
+unsigned char proper_to_bcd_single(unsigned char value)
 {
     unsigned char high, low;
 
@@ -36,7 +36,7 @@ inline unsigned char proper_to_bcd_single(unsigned char value)
     return high | low;
 }
 
-inline unsigned char* proper_to_bcd(unsigned int value, unsigned char* target, size_t len)
+unsigned char* proper_to_bcd(unsigned int value, unsigned char* target, size_t len)
 {
     while (value > 0 && len > 0) {
         target[len - 1] = proper_to_bcd_single(value & 0xff);
@@ -47,7 +47,7 @@ inline unsigned char* proper_to_bcd(unsigned int value, unsigned char* target, s
     return target;
 }
 
-inline unsigned char bcd_to_proper_single(unsigned char value)
+unsigned char bcd_to_proper_single(unsigned char value)
 {
     unsigned char high, low;
 
@@ -57,7 +57,7 @@ inline unsigned char bcd_to_proper_single(unsigned char value)
     return ((high * 10U) + low) & 0xff;
 }
 
-inline unsigned int bcd_to_proper(unsigned char* value, size_t len)
+unsigned int bcd_to_proper(unsigned char* value, size_t len)
 {
     unsigned int result = 0;
     unsigned int nibble_value = 1;
